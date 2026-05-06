@@ -1,0 +1,121 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "banking-pipeline"
+version = "1.0.0"
+description = "A production-ready ETL pipeline for banking transactions with fraud detection"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Rajput Suraj", email = "suraj.rajput@example.com"}
+]
+maintainers = [
+    {name = "Rajput Suraj", email = "suraj.rajput@example.com"}
+]
+keywords = ["banking", "etl", "pipeline", "fraud-detection", "data-processing"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "pandas>=1.5.0",
+    "pytest>=7.0.0",
+    "memory-profiler>=0.60.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest-cov>=4.0.0",
+    "flake8>=5.0.0",
+    "black>=22.0.0",
+    "bandit>=1.7.0",
+    "safety>=2.0.0",
+]
+performance = [
+    "psutil>=5.9.0",
+]
+
+[project.scripts]
+banking-pipeline = "src.main:run_pipeline"
+
+[project.urls]
+Homepage = "https://github.com/Rajputsuraj11/banking-pipeline"
+Documentation = "https://github.com/Rajputsuraj11/banking-pipeline/blob/main/README.md"
+Repository = "https://github.com/Rajputsuraj11/banking-pipeline.git"
+"Bug Tracker" = "https://github.com/Rajputsuraj11/banking-pipeline/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.md", "*.txt", "*.yml", "*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--verbose",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".venv",
+    ".eggs",
+    "*.egg-info",
+]

@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  banking-pipeline:
+    build: .
+    container_name: banking-pipeline
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+      - ./logs:/app/logs
+    environment:
+      - PYTHONPATH=/app/src
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    
+  # Optional: Add a database for future enhancements
+  # postgres:
+  #   image: postgres:15
+  #   container_name: banking-db
+  #   environment:
+  #     POSTGRES_DB: banking_pipeline
+  #     POSTGRES_USER: pipeline_user
+  #     POSTGRES_PASSWORD: pipeline_pass
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:

@@ -1,0 +1,6 @@
+transaction_id,account_id,amount,transaction_type,transaction_date,currency
+1,1001,500,credit,2024-01-01,USD
+2,1002,200,debit,2024-01-01,USD
+3,1001,,credit,2024-01-02,USD
+4,1003,1000,debit,2024-01-02,USD
+4,1003,1000,debit,2024-01-02,USD
